@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ArticleList from './components/ArticleList';
+import Article from './components/Article';
+import storeFactory from './store';
+import { Provider } from 'react-redux';
+
+const initialState = {};
+const store = storeFactory(initialState);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path={'/'}>
+            <div>
+              <ArticleList />
+            </div>
+          </Route>
+          <Route exact path={'/articles/:articleId'}>
+            <div>
+              <Article />
+            </div>
+          </Route>
+          <Route exact path={'/articles/add'}>
+            <div>
+              <Article />
+            </div>
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
