@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ArticleList from './components/ArticleList';
-import Article from './components/Article';
+import ArticleEdit from './components/ArticleEdit';
+import Article from "./components/Article";
 import storeFactory from './store';
 import { Provider } from 'react-redux';
 
@@ -18,14 +19,14 @@ function App() {
               <ArticleList />
             </div>
           </Route>
-          <Route exact path={'/articles/:articleId'}>
+          <Route exact path={'/addArticle'}>
             <div>
               <Article />
             </div>
           </Route>
-          <Route exact path={'/articles/add'}>
+          <Route exact path={'/articles/:articleId'}>
             <div>
-              <Article />
+              <ArticleEdit />
             </div>
           </Route>
         </Switch>

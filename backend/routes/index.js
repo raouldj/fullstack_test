@@ -21,7 +21,8 @@ router.get('/articles', function(req, res, next) {
 });
 
 router.get('/articles/:id', function(req, res, next) {
-  console.log(req.params.id);
+  res.header("Access-Control-Allow-Origin", allowedOrigin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const article = articles.find((currArticle) => currArticle.id === parseInt(req.params.id, 10));
   if (typeof article === 'undefined') {
     res.status(404).send(`Article ${req.params.id} not found`);

@@ -30,12 +30,41 @@ const articlesApiReducer = (state = {}, action) => {
   }
 };
 
-const articleApiReducer = (state = {}, action) => {
+const articleReducer = (state = {}, action) => {
+  if (action.type === articleConstants.GET_ARTICLE_SUCCESS) {
+    return action.payload;
+  }
   return state;
+};
+
+const articleApiReducer = (state = {}, action) => {
+  switch (action.type) {
+    case articleConstants.GET_ARTICLE_REQUEST:
+      return {
+        inProgress: true,
+        error: null,
+        method: 'GET',
+      };
+    case articleConstants.GET_ARTICLE_SUCCESS:
+      return {
+        inProgress: false,
+        error: null,
+        method: 'GET',
+      };
+    case articleConstants.GET_ARTICLE_FAILURE:
+      return {
+        inProgress: false,
+        error: action.payload,
+        method: 'GET',
+      };
+    default:
+      return state;
+  }
 };
 
 const articlesReducers = combineReducers({
   articles: articlesReducer,
+  article: articleReducer,
   articlesApi: articlesApiReducer,
   articleApi: articleApiReducer,
 });

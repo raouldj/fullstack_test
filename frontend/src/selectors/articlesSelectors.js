@@ -8,3 +8,14 @@ export const articlesSelector = (state) => {
   }
   return articles;
 };
+
+export const articleSelector = (state) => {
+  const { article, articleApi } = state.articles;
+  if (typeof articleApi.inProgress === 'undefined'
+    || articleApi.inProgress === true
+    || articleApi.error !== null
+  ) {
+    return null;
+  }
+  return article;
+}
